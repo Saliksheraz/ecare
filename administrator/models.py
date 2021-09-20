@@ -12,3 +12,16 @@ class pharmacy(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+
+class products(models.Model):
+    name = models.CharField(max_length=50, null=True)
+    price = models.CharField(max_length=50, null=True)
+    image = models.FileField(null=True)
+
+    def delete(self, using=None, keep_parents=False):
+        self.image.storage.delete(self.image.name)
+        super().delete()
+
+    def __str__(self):
+        return str(self.name)

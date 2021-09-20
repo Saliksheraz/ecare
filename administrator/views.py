@@ -2,8 +2,10 @@ from django.shortcuts import render
 from math import radians, cos, sin, asin, sqrt
 from .models import pharmacy
 
+
 def index(request):
     distance = dist(8.337611, 5.131840, 8.02315646, 5.131840)
+    print(request.user)
     return render(request, 'administrator/index.html')
 
 
@@ -19,7 +21,7 @@ def findPharmacy(request):
             if temp < nearestPharmacyDistance:
                 nearestPharmacyDistance = temp
                 nearestPharmacyID = each.id
-        context = {'nearestPharmacy':pharmacy.objects.get(id=nearestPharmacyID)}
+        context = {'nearestPharmacy': pharmacy.objects.get(id=nearestPharmacyID)}
         return render(request, 'administrator/findPharmacy.html', context)
     return render(request, 'administrator/findPharmacy.html')
 
